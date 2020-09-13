@@ -1,3 +1,92 @@
-<h1>TEST</h1>
+<html>
+<meta charset="utf-8">
+<meta name="viewport" content="width = device-width, initial-scale = 1, user-scalable = no">
 
-<p>xxxxx</a>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<div class=container>
+
+ <div class="row">
+<div class="col-10">
+<h1>労働否定の会</h1>
+<div class="list-group">
+<a href="#" class="list-group-item list-group-item-action active">
+入会資格
+</a>
+<a href="#" class="list-group-item list-group-item-action">
+- 働いてない人
+<br>
+- 働かない生活を目指している人
+</a>
+</div>
+<br>
+<div class="list-group">
+<a href="#" class="list-group-item list-group-item-action active">
+年会費
+</a>
+<a href="#" class="list-group-item list-group-item-action">
+98,000 JPY / 1年間
+</a>
+</div>
+<br>
+<div class="list-group">
+<a href="#" class="list-group-item list-group-item-action active">
+TITLE
+</a>
+<a href="#" class="list-group-item list-group-item-action">
+</a>
+</div>
+
+<br>
+<input class=form-control type=email>
+<br>
+<script src="https://js.stripe.com/v3/"></script>
+  <div id="card-element" class="form-control"> </div>
+<br>
+  <div id="card-errors" ></div>
+  <button class="btn btn-primary" onclick="pay()">pay</button>
+  <script>
+  var stripe=Stripe('pk_test_MIlzjsoAglmbORxqFnjEsRFj'),
+  card = stripe.elements().create('card',{ hidePostalCode: true });
+  card.mount('#card-element');
+
+  var pay=()=>{
+  stripe.createToken(card).then((result)=>{
+      result.error ? document.getElementById('card-errors').textContent = result.error.message
+      :
+      reg(result.token.id)
+      })
+}
+
+var reg=( id )=>{
+    location.href ="pay.php?id="+encodeURI(id);
+}
+</script>
+</div>
+</div>
+</div>
+
+
+<!--
+<div id="paypal_btn" style="width:120px;"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=AXBTifHEVDyRhOgL9Dpo960uxbb4wgJISY0_kqKuZNwzMlSvKspi_DaulSbyM8HzWoh2tVnoGxnc1ev-&currency=JPY"></script>
+<script>
+paypal.Buttons({
+style: {  size: 'small', layout: 'horizontal'  , color:'blue'},
+createOrder:  (data, actions)=> {
+return actions.order.create({ purchase_units: [{amount: { value: '498'}}]});
+},
+onApprove:  (data, actions)=> {
+return actions.order.capture().then( (details)=> {
+  alert( 'id=' + details.id+"/email=" + details.payer.email_address+ "/name="+details.payer.name.given_name );
+  });
+}
+}).render('#paypal_btn');
+</script>
+</body>
+-->
+
+
+
